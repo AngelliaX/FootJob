@@ -15,9 +15,9 @@
   - "/fj aa (name)" (aka /fj addarea) to create a area by breaking 2 block,and area will have a name you named
   - "/fj acc (name) (text)" (aka /fj addconsolecommand) to add a command to be executed by console
     - use {name} as player name
-    - Ex: /fj acc randomname give {name} apple 1
+    - Ex: /fj acc randomName give {name} apple 1
   - "/fj apc (name) (text)" (aka /fj addplayercommand) to add a command to be executed by the player walked in the portal
-    - Ex: /fj apc hub
+    - Ex: /fj apc randomName hub
   - "/fj ra (name)" (aka /fj removearea) to delete an area
 ## **Config.yml**
  + Go to config.yml to see all the area,commands on its area, easy editting her
