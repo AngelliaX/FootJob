@@ -11,11 +11,12 @@
  + Type "/fj help to see lists of commands"
  + SubCommands:
   - /fj list to see lists of area
-  - "/fj aa <name>" (aka /fj addarea) to create a area by breaking 2 block
-  - "/fj acc <name> <text>" (aka /fj addconsolecommand) to add a command to be executed by console
+  (name) is area name
+  - "/fj aa (name)" (aka /fj addarea) to create a area by breaking 2 block,and area will have a name you named
+  - "/fj acc (name) (text)" (aka /fj addconsolecommand) to add a command to be executed by console
     - use "*{name}*" as player name
-  - "/fj apc <name> <text>" (aka /fj addplayercommand) to add a command to be executed by the player walked in the portal
-  - "/fj ra <name>" (aka /fj removearea) to delete an area
+  - "/fj apc (name) (text)" (aka /fj addplayercommand) to add a command to be executed by the player walked in the portal
+  - "/fj ra (name)" (aka /fj removearea) to delete an area
 ## **Config.yml**
  + Go to config.yml to see all the area,commands on its area, easy editting her
 ## **Introduce**
