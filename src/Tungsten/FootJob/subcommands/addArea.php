@@ -2,8 +2,8 @@
 
 namespace Tungsten\FootJob\subcommands;
 
-
 use pocketmine\event\block\BlockBreakEvent;
+use pocketmine\event\HandlerList;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\Player;
@@ -14,7 +14,6 @@ class addArea implements Listener
     public $cmds;
     private $playerName;
     private $check = [];
-    private $isStop = false;
     private $args;
 
     public function __construct(Commands $cmds, Player $sender, array $args)
@@ -27,14 +26,12 @@ class addArea implements Listener
 
     public function breakBlock(BlockBreakEvent $ev)
     {
-        if ($this->isStop) return;
         $player = $ev->getPlayer();
         if ($player->getName() != $this->playerName) return;
         $ev->setCancelled();
         $block = $ev->getBlock();
         $this->check[count($this->check)] = [$block->x, $block->y, $block->z];
         if (count($this->check) >= 2) {
-            $this->isStop = true;
             $name = $this->args[1];
             $player->sendMessage("§aFinishing adding area §6$name §a,/fj list");
             $this->finish($player);
@@ -57,15 +54,16 @@ class addArea implements Listener
         $config->setNested("$areaName.x", [($x1 <= $x2) ? [$x1, $x2] : [$x2, $x1]]);
         $config->setNested("$areaName.y", [($y1 <= $y2) ? [$y1, $y2] : [$y2, $y1]]);
         $config->setNested("$areaName.z", [($z1 <= $z2) ? [$z1, $z2] : [$z2, $z1]]);
-        $config->setNested("$areaName.level",$player->getLevel()->getName());
+        $config->setNested("$areaName.level", $player->getLevel()->getName());
         $config->save();
+
+        HandlerList::unregisterAll($this);
     }
 
     public function onQuit(PlayerQuitEvent $ev)
     {
-        if ($this->isStop) return;
         if ($ev->getPlayer()->getName() == $this->playerName) {
-            $this->isStop = true;
+            HandlerList::unregisterAll($this);
         }
     }
 }

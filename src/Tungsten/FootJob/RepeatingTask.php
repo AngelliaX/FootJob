@@ -5,6 +5,7 @@ namespace Tungsten\FootJob;
 use pocketmine\command\ConsoleCommandSender;
 use pocketmine\event\Listener;
 use pocketmine\math\Vector3;
+use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;
@@ -27,6 +28,7 @@ class RepeatingTask extends Task implements Listener
         $internalConfig = $this->config->getAll();
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
+            if(!is_array($value)) return;
             $players = $this->fj->getServer()->getLevelByName($value["level"])->getPlayers();
             if ($players == []) continue;
             $x1 = $value["x"][0][0];
@@ -43,11 +45,21 @@ class RepeatingTask extends Task implements Listener
                     if (isset($value["playercmds"])) {
                         $this->playerCommand($value["playercmds"], $player);
                     }
+                    $this->sound($player);
                 }
             }
         }
     }
-
+    private function sound(Player $player){
+        $sound = new PlaySoundPacket();
+        $sound->x = $player->getX();
+        $sound->y = $player->getY();
+        $sound->z = $player->getZ();
+        $sound->volume = 1;
+        $sound->pitch = 1;
+        $sound->soundName = "mob.endermen.portal";
+        $this->fj->getServer()->broadcastPacket([$player], $sound);
+    }
     private function isInside(float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ, Vector3 $vector)
     {
         if ($vector->x < $minX or $vector->x > $maxX) {

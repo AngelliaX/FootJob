@@ -1,6 +1,4 @@
 <?
-declare(strict_types=1);
-
 namespace Tungsten\FootJob;
 
 use pocketmine\command\Command;
