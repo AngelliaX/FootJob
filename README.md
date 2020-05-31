@@ -5,9 +5,11 @@
 <a href="https://discord.gg/5CpFadd"><img src="https://discordapp.com/api/guilds/472786873492832256/embed.png" alt="Discord server"/></a>
 <a align="center"><img src="https://raw.githubusercontent.com/TungstenVn/FootJob/master/icon2.png"></a>
 ### Creating portal 
-+ **What is this plugin for**    
++ *What is this plugin for*    
   - With this plugin,you can create a portal that will execute command as player and console when someone walk in
   - There is a video review you can watch in the Introduce page 
+## **Permisson**
+  - Who has "footjob.permission" permission can use the commands only
 ## **Commands**
  + Type "/fj help to see lists of commands"
  + SubCommands:
