@@ -18,6 +18,7 @@ class listsubcmd
             return;
         }
         foreach ($config as $name => $results) {
+            if(!is_array($results)) continue;
             $X = $results["x"][0];
             $Y = $results["y"][0];
             $Z = $results["z"][0];

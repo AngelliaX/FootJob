@@ -28,7 +28,7 @@ class RepeatingTask extends Task implements Listener
         $internalConfig = $this->config->getAll();
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
-            if(!is_array($value)) return;
+            if(!is_array($value)) continue;
             $players = $this->fj->getServer()->getLevelByName($value["level"])->getPlayers();
             if ($players == []) continue;
             $x1 = $value["x"][0][0];
