@@ -32,11 +32,12 @@ class Commands extends Command implements PluginIdentifiableCommand
             return;
         }
         if (!isset($args[0])) {
-            $args[0] = "help";
+            $sender->sendMessage("§cMissing some arguments!,try /fj help");
+            return;
         }
         if (strtolower($args[0]) == "addarea" or strtolower($args[0]) == "aa") {
             if (!isset($args[1])) {
-                $sender->sendMessage("§aThe area must have a name,/fj aa <name>");
+                $sender->sendMessage("§cThe area must have a name,/fj aa <name>");
                 return;
             }
             if (!$sender instanceof Player) {
@@ -53,8 +54,10 @@ class Commands extends Command implements PluginIdentifiableCommand
             $cmd = new addconsolecmd($this, $sender, $args);
         } else if (strtolower($args[0]) == "removearea" or strtolower($args[0]) == "ra") {
             $cmd = new removearena($this, $sender, $args);
-        } else {
-            $cmd = new help($this, $sender, $args);
+        } else if(strtolower($args[0]) == "help"){
+        	$cmd = new help($this, $sender, $args);
+        }else {
+            $sender->sendMessage("§cNo command was found!,try /fj help");
         }
     }
 
