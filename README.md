@@ -1,16 +1,15 @@
 # FootJob
+### Creating portal 
 [![](https://poggit.pmmp.io/shield.state/FootJob)](https://poggit.pmmp.io/p/FootJob)
 [![](https://poggit.pmmp.io/shield.dl.total/FootJob)](https://poggit.pmmp.io/p/FootJob)
 [![Discord](https://img.shields.io/badge/chat-on+discord-7289da.svg)](https://discord.gg/5CpFadd)
 <a href="https://discord.gg/5CpFadd"><img src="https://discordapp.com/api/guilds/472786873492832256/embed.png" alt="Discord server"/></a>
-### Creating portal 
-- **What is this plugin for**    
+ ### What is this plugin for
   - With this plugin,you can **create** a **invisible portal** that will **execute command** as **player** and **console** when someone **colliding it**
-  
-- **How does this work**
+ ### How does this work
   - The portal is just a coordination,you can place any block there or leave it empty (air)
   - And when someone collide this coordination, they will trigger the portal to excute commands
-- **How to create portals**
+ ### How to create portals
   - Use `/fj aa` to create portal
   - Use `/fj ra` to remove the portal (with all the settings)
   - How to add commands,and mores, go to [Commands](#commands)
