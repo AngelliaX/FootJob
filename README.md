@@ -23,7 +23,7 @@
  ### Type ``/fj help`` to see lists of commands
  ### SubCommands:
   - ``/fj list`` to see lists of area
-   > (name) under is stand for area name.
+  **`(name)` under is stand for area name.**
   - `/fj aa (name)` (aka /fj addarea) to create a area by breaking 2 block,and area will have a name you named
   - `/fj acc (name) (text)` (/fj addconsolecommand) to add a command that'll be executed by console
     > use extractly this word `{name}` as player name when the command excuted
