@@ -38,7 +38,7 @@ class RepeatingTask extends Task implements Listener
             $z1 = $value["z"][0][0];
             $z2 = $value["z"][0][1];
             foreach ($players as $player) {
-                if ($this->isInside($x1-0.9, $x2 - 0.9, $y1-0.9, $y2 -0.9, $z1-0.9, $z2-0.9, $player)) {
+                if ($this->isInside($x1, $x2, $y1, $y2, $z1, $z2, $player)) {
                     if (isset($value["consolecmds"])) {
                         $this->consoleCommand($value["consolecmds"], $player);
                     }

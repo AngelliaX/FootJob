@@ -51,9 +51,15 @@ class addArea implements Listener
         $z1 = $this->check[0][2];
         $z2 = $this->check[1][2];
 
-        $config->setNested("$areaName.x", [($x1 <= $x2) ? [$x1, $x2] : [$x2, $x1]]);
-        $config->setNested("$areaName.y", [($y1 <= $y2) ? [$y1, $y2] : [$y2, $y1]]);
-        $config->setNested("$areaName.z", [($z1 <= $z2) ? [$z1, $z2] : [$z2, $z1]]);
+        /*
+        ->when you use $block->getPosition(),the returned value will be the lower number.
+        Example:
+        ->a X coord of a block is 160,it's will be 160 and 161 in two side,at middle point)
+        ->a X coord is -160,it's -160,-159
+        */
+        $config->setNested("$areaName.x", [($x1 <= $x2) ? [$x1, $x2+1] : [$x2, $x1+1]]);
+        $config->setNested("$areaName.y", [($y1 <= $y2) ? [$y1, $y2+1] : [$y2, $y1+1]]);
+        $config->setNested("$areaName.z", [($z1 <= $z2) ? [$z1, $z2+1] : [$z2, $z1+1]]);
         $config->setNested("$areaName.level", $player->getLevel()->getName());
         $config->save();
 
