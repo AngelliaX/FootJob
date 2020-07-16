@@ -1,4 +1,4 @@
-<?
+<?php
 namespace Tungsten\FootJob;
 
 use pocketmine\command\Command;
