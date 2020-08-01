@@ -12,7 +12,7 @@
   - Use `/fj aa` to create portal
   - Use `/fj ra` to remove the portal (with all the settings)
   - How to add commands,and mores, go to [Commands](#commands)
-  - There is also a video you can watch in the [Introduce](#introduce)
+  - There is also a video you can watch in the [Instroduce](#introduce)
  ### Why is it named footjob
   - Because you need to walk into the portal to help the plugin work
   - And you walk on foot
