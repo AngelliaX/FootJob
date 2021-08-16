@@ -29,7 +29,9 @@ class RepeatingTask extends Task implements Listener
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
             if(!is_array($value)) continue;
-            $players = $this->fj->getServer()->getLevelByName($value["level"])->getPlayers();
+            $world = $this->fj->getServer()->getLevelByName($value["level"]);
+            if($world !== null){
+            $players = $world->getPlayers();
             if ($players == []) continue;
             $x1 = $value["x"][0][0];
             $x2 = $value["x"][0][1];
@@ -50,6 +52,7 @@ class RepeatingTask extends Task implements Listener
             }
         }
     }
+}
     private function sound(Player $player){
         $sound = new PlaySoundPacket();
         $sound->x = $player->getX();
