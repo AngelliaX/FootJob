@@ -8,7 +8,7 @@ use Tungsten\FootJob\Commands;
 
 class listsubcmd
 {
-    public function __construct(Commands $cmds, CommandSender $sender, array $args)
+    public function __construct(Commands $cmds, CommandSender $sender)
     {
         $config = $cmds->fj->task->config;
         $config = $config->getAll();
