@@ -32,7 +32,7 @@ class checkUpdate extends AsyncTask
     }
 
     /**
-     * @param Server $server
+     * @return void
      */
     public function onCompletion(): void
     {
