@@ -27,7 +27,7 @@ class Commands extends Command implements PluginOwned
 
     public function getOwningPlugin(): Plugin
     {
-        $this->fj;
+        return $this->fj;
     }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
