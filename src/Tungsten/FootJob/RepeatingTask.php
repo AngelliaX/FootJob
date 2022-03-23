@@ -6,7 +6,7 @@ use pocketmine\command\ConsoleCommandSender;
 use pocketmine\event\Listener;
 use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\PlaySoundPacket;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;
 
@@ -23,13 +23,13 @@ class RepeatingTask extends Task implements Listener
     }
 
 
-    public function onRun($tick)
+    public function onRun(): void
     {
         $internalConfig = $this->config->getAll();
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
             if(!is_array($value)) continue;
-            $players = $this->fj->getServer()->getLevelByName($value["level"])->getPlayers();
+            $players = $this->fj->getServer()->getWorldManager()->getWorldByName($value["level"])->getPlayers();
             if ($players == []) continue;
             $x1 = $value["x"][0][0];
             $x2 = $value["x"][0][1];
@@ -38,7 +38,7 @@ class RepeatingTask extends Task implements Listener
             $z1 = $value["z"][0][0];
             $z2 = $value["z"][0][1];
             foreach ($players as $player) {
-                if ($this->isInside($x1, $x2, $y1, $y2, $z1, $z2, $player)) {
+                if ($this->isInside($x1, $x2, $y1, $y2, $z1, $z2, $player->getPosition()->asVector3())) {
                     if (isset($value["consolecmds"])) {
                         $this->consoleCommand($value["consolecmds"], $player);
                     }
@@ -51,14 +51,15 @@ class RepeatingTask extends Task implements Listener
         }
     }
     private function sound(Player $player){
+        $pos = $player->getPosition();
         $sound = new PlaySoundPacket();
-        $sound->x = $player->getX();
-        $sound->y = $player->getY();
-        $sound->z = $player->getZ();
+        $sound->x = $pos->getX();
+        $sound->y = $pos->getY();
+        $sound->z = $pos->getZ();
         $sound->volume = 1;
         $sound->pitch = 1;
         $sound->soundName = "mob.endermen.portal";
-        $this->fj->getServer()->broadcastPacket([$player], $sound);
+        $player->getNetworkSession()->sendDataPacket($sound);
     }
     private function isInside(float $minX, float $maxX, float $minY, float $maxY, float $minZ, float $maxZ, Vector3 $vector)
     {
@@ -77,7 +78,7 @@ class RepeatingTask extends Task implements Listener
         $name = $player->getName();
         foreach ($cmds as $cmd) {
             $cmd = str_replace("{name}", $name, $cmd);
-            $this->fj->getServer()->dispatchCommand(new ConsoleCommandSender(), $cmd);
+            $this->fj->getServer()->dispatchCommand(new ConsoleCommandSender($this->fj->getServer(), $this->fj->getServer()->getLanguage()), $cmd);
         }
     }
 

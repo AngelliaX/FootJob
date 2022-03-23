@@ -6,7 +6,7 @@ use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\HandlerList;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use Tungsten\FootJob\Commands;
 
 class addArea implements Listener
@@ -28,7 +28,7 @@ class addArea implements Listener
     {
         $player = $ev->getPlayer();
         if ($player->getName() != $this->playerName) return;
-        $ev->setCancelled();
+        $ev->cancel();
         $block = $ev->getBlock();
         $this->check[count($this->check)] = [$block->x, $block->y, $block->z];
         if (count($this->check) >= 2) {
@@ -60,16 +60,16 @@ class addArea implements Listener
         $config->setNested("$areaName.x", [($x1 <= $x2) ? [$x1, $x2+1] : [$x2, $x1+1]]);
         $config->setNested("$areaName.y", [($y1 <= $y2) ? [$y1, $y2+1] : [$y2, $y1+1]]);
         $config->setNested("$areaName.z", [($z1 <= $z2) ? [$z1, $z2+1] : [$z2, $z1+1]]);
-        $config->setNested("$areaName.level", $player->getLevel()->getName());
+        $config->setNested("$areaName.level", $player->getWorld()->getName());
         $config->save();
 
-        HandlerList::unregisterAll($this);
+        HandlerList::unregister($this);
     }
 
     public function onQuit(PlayerQuitEvent $ev)
     {
         if ($ev->getPlayer()->getName() == $this->playerName) {
-            HandlerList::unregisterAll($this);
+            HandlerList::unregister($this);
         }
     }
 }

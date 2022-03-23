@@ -11,7 +11,7 @@ class FootJob extends PluginBase implements Listener
     public static $instance;
     public $task;
 
-    public function onEnable()
+    public function onEnable(): void
     {
         self::$instance = $this;
 
@@ -31,11 +31,4 @@ class FootJob extends PluginBase implements Listener
             $this->getServer()->getAsyncPool()->submitTask(new checkUpdate());
         }
     }
-
-    public function onDisable()
-    {
-        //dont need this anymore cuz i'll save the config everytime a player set something new
-        #$this->task->config->save();
-    }
-
 }
