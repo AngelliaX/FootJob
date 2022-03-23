@@ -3,7 +3,7 @@
 namespace Tungsten\FootJob\subcommands;
 
 use pocketmine\event\block\BlockBreakEvent;
-use pocketmine\event\HandlerList;
+use pocketmine\event\HandlerListManager;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\player\Player;
@@ -63,13 +63,13 @@ class addArea implements Listener
         $config->setNested("$areaName.level", $player->getWorld()->getFolderName());
         $config->save();
 
-        HandlerList::getInstance()->unregister($this);
+        HandlerListManager::global()->unregisterAll();
     }
 
     public function onQuit(PlayerQuitEvent $ev)
     {
         if ($ev->getPlayer()->getName() == $this->playerName) {
-            HandlerList::getInstance()->unregister($this);
+            HandlerListManager::global()->unregisterAll();
         }
     }
 }
