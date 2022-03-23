@@ -1,5 +1,5 @@
 # FootJob
-[![](https://poggit.pmmp.io/shield.state/FootJob-PM4)](https://poggit.pmmp.io/p/FootJon-PM4)
+[![](https://poggit.pmmp.io/shield.state/FootJob-PM4)](https://poggit.pmmp.io/p/FootJob-PM4)
 [![](https://poggit.pmmp.io/shield.dl.total/FootJob-PM4)](https://poggit.pmmp.io/p/FootJob-PM4)
 [![Discord](https://img.shields.io/badge/chat-on+discord-7289da.svg)](https://discord.gg/5CpFadd)
 <a href="https://discord.gg/5CpFadd"><img src="https://discordapp.com/api/guilds/472786873492832256/embed.png" alt="Discord server"/></a>
