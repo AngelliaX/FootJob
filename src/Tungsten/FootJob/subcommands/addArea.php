@@ -30,7 +30,7 @@ class addArea implements Listener
         if ($player->getName() != $this->playerName) return;
         $ev->cancel();
         $block = $ev->getBlock();
-        $this->check[count($this->check)] = [$block->x, $block->y, $block->z];
+        $this->check[count($this->check)] = [$block->getPosition()->x, $block->getPosition()->y, $block->getPosition()->z];
         if (count($this->check) >= 2) {
             $name = $this->args[1];
             $player->sendMessage("§aFinishing adding area §6$name §a,/fj list");
@@ -60,16 +60,16 @@ class addArea implements Listener
         $config->setNested("$areaName.x", [($x1 <= $x2) ? [$x1, $x2+1] : [$x2, $x1+1]]);
         $config->setNested("$areaName.y", [($y1 <= $y2) ? [$y1, $y2+1] : [$y2, $y1+1]]);
         $config->setNested("$areaName.z", [($z1 <= $z2) ? [$z1, $z2+1] : [$z2, $z1+1]]);
-        $config->setNested("$areaName.level", $player->getWorld()->getName());
+        $config->setNested("$areaName.level", $player->getWorld()->getFolderName());
         $config->save();
 
-        HandlerList::unregister($this);
+        HandlerList::getInstance()->unregister($this);
     }
 
     public function onQuit(PlayerQuitEvent $ev)
     {
         if ($ev->getPlayer()->getName() == $this->playerName) {
-            HandlerList::unregister($this);
+            HandlerList::getInstance()->unregister($this);
         }
     }
 }
