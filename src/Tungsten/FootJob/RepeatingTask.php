@@ -9,6 +9,7 @@ use pocketmine\network\mcpe\protocol\PlaySoundPacket;
 use pocketmine\player\Player;
 use pocketmine\scheduler\Task;
 use pocketmine\utils\Config;
+use pocketmine\world\World;
 
 class RepeatingTask extends Task implements Listener
 {
@@ -29,23 +30,26 @@ class RepeatingTask extends Task implements Listener
         if (!is_array($internalConfig) or count($internalConfig) <= 0) return;
         foreach ($internalConfig as $value) {
             if(!is_array($value)) continue;
-            $players = $this->fj->getServer()->getWorldManager()->getWorldByName($value["level"])->getPlayers();
-            if ($players == []) continue;
-            $x1 = $value["x"][0][0];
-            $x2 = $value["x"][0][1];
-            $y1 = $value["y"][0][0];
-            $y2 = $value["y"][0][1];
-            $z1 = $value["z"][0][0];
-            $z2 = $value["z"][0][1];
-            foreach ($players as $player) {
-                if ($this->isInside($x1, $x2, $y1, $y2, $z1, $z2, $player->getPosition()->asVector3())) {
-                    if (isset($value["consolecmds"])) {
-                        $this->consoleCommand($value["consolecmds"], $player);
+            $world = $this->fj->getServer()->getWorldManager()->getWorldByName($value["level"]);
+            if ($world instanceof World) {
+                $players = $world->getPlayers();
+                if ($players == []) continue;
+                $x1 = $value["x"][0][0];
+                $x2 = $value["x"][0][1];
+                $y1 = $value["y"][0][0];
+                $y2 = $value["y"][0][1];
+                $z1 = $value["z"][0][0];
+                $z2 = $value["z"][0][1];
+                foreach ($players as $player) {
+                    if ($this->isInside($x1, $x2, $y1, $y2, $z1, $z2, $player->getPosition()->asVector3())) {
+                        if (isset($value["consolecmds"])) {
+                            $this->consoleCommand($value["consolecmds"], $player);
+                        }
+                        if (isset($value["playercmds"])) {
+                            $this->playerCommand($value["playercmds"], $player);
+                        }
+                        $this->sound($player);
                     }
-                    if (isset($value["playercmds"])) {
-                        $this->playerCommand($value["playercmds"], $player);
-                    }
-                    $this->sound($player);
                 }
             }
         }
