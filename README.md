@@ -1,6 +1,6 @@
 # FootJob
-[![](https://poggit.pmmp.io/shield.state/FootJob)](https://poggit.pmmp.io/p/FootJob)
-[![](https://poggit.pmmp.io/shield.dl.total/FootJob)](https://poggit.pmmp.io/p/FootJob)
+[![](https://poggit.pmmp.io/shield.state/FootJob-PM4)](https://poggit.pmmp.io/p/FootJob-PM4)
+[![](https://poggit.pmmp.io/shield.dl.total/FootJob-PM4)](https://poggit.pmmp.io/p/FootJob-PM4)
 [![Discord](https://img.shields.io/badge/chat-on+discord-7289da.svg)](https://discord.gg/5CpFadd)
 <a href="https://discord.gg/5CpFadd"><img src="https://discordapp.com/api/guilds/472786873492832256/embed.png" alt="Discord server"/></a>
  ### What is this plugin for
@@ -16,7 +16,7 @@
  ### Why is it named footjob
   - Because you need to walk into the portal to help the plugin work
   - And you walk on foot
-<a align="center"><img src="https://raw.githubusercontent.com/TungstenVn/FootJob/master/icon2.png"></a>
+<a align="center"><img src="https://raw.githubusercontent.com/David-pm-pl/FootJob-PM4/master/icon2.png"></a>
 ## Permisson
   - Who has **footjob.permission** permission can use the commands only
 ## Commands

@@ -4,8 +4,9 @@ namespace Tungsten\FootJob;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginIdentifiableCommand;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\Plugin;
+use pocketmine\plugin\PluginOwned;
 use Tungsten\FootJob\subcommands\addArea;
 use Tungsten\FootJob\subcommands\addconsolecmd;
 use Tungsten\FootJob\subcommands\addplayercmd;
@@ -13,17 +14,21 @@ use Tungsten\FootJob\subcommands\help;
 use Tungsten\FootJob\subcommands\listsubcmd;
 use Tungsten\FootJob\subcommands\removearena;
 
-class Commands extends Command implements PluginIdentifiableCommand
+class Commands extends Command implements PluginOwned
 {
     public $fj;
 
     public function __construct(FootJob $fj)
     {
+        $this->fj = $fj;
         parent::__construct("fj", "FootJobs Commands");
         $this->setPermission("footjob.permission");
-        $this->fj = $fj;
     }
 
+    public function getOwningPlugin(): Plugin
+    {
+        return $this->fj;
+    }
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
@@ -47,7 +52,7 @@ class Commands extends Command implements PluginIdentifiableCommand
             $cmd = new addArea($this, $sender, $args);
             $this->fj->getServer()->getPluginManager()->registerEvents($cmd, $this->fj);
         } else if (strtolower($args[0]) == "list") {
-            $cmd = new listsubcmd($this, $sender, $args);
+            $cmd = new listsubcmd($this, $sender);
         } else if (strtolower($args[0]) == "addplayercmd" or strtolower($args[0]) == "apc") {
             $cmd = new addplayercmd($this, $sender, $args);
         } else if (strtolower($args[0]) == "addconsolecmd" or strtolower($args[0]) == "acc") {
@@ -55,7 +60,7 @@ class Commands extends Command implements PluginIdentifiableCommand
         } else if (strtolower($args[0]) == "removearea" or strtolower($args[0]) == "ra") {
             $cmd = new removearena($this, $sender, $args);
         } else if(strtolower($args[0]) == "help"){
-        	$cmd = new help($this, $sender, $args);
+        	$cmd = new help($sender);
         }else {
             $sender->sendMessage("§cNo command was found!,try /fj help");
         }
